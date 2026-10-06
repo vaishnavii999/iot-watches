@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridian &middot; Fleet Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="org-mark">
+        <span class="org-name" id="org-name">—</span>
+        <span class="org-id" id="org-id">org —</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-item is-active" data-view="users">Users</button>
+        <button class="nav-item" data-view="watches">Watches</button>
+        <button class="nav-item" data-view="updates">Updates</button>
+      </nav>
+      <div class="sidebar-foot">
+        <span id="conn-dot" class="conn-dot"></span>
+        <span id="conn-label">connecting&hellip;</span>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <!-- USERS VIEW -->
+      <section class="view is-active" id="view-users">
+        <header class="view-head">
+          <h1>Users</h1>
+          <p class="view-sub">Filter the roster by age and resting heart rate.</p>
+        </header>
+
+        <div class="filter-panel">
+          <div class="filter">
+            <div class="filter-label">
+              <span>Age</span>
+              <span class="filter-readout"><span id="age-min-out">0</span>&ndash;<span id="age-max-out">100</span></span>
+            </div>
+            <div class="range-dual" id="age-range">
+              <div class="range-track"></div>
+              <div class="range-fill" id="age-fill"></div>
+              <input type="range" min="0" max="100" value="0" id="age-min" class="range-input range-input--min">
+              <input type="range" min="0" max="100" value="100" id="age-max" class="range-input range-input--max">
+            </div>
+          </div>
+
+          <div class="filter">
+            <div class="filter-label">
+              <span>Heart rate</span>
+              <span class="filter-readout"><span id="hr-min-out">30</span>&ndash;<span id="hr-max-out">180</span> bpm</span>
+            </div>
+            <div class="range-dual" id="hr-range">
+              <div class="range-track"></div>
+              <div class="range-fill" id="hr-fill"></div>
+              <input type="range" min="30" max="180" value="30" id="hr-min" class="range-input range-input--min">
+              <input type="range" min="30" max="180" value="180" id="hr-max" class="range-input range-input--max">
+            </div>
+          </div>
+
+          <button class="btn-ghost" id="reset-filters">Reset filters</button>
+        </div>
+
+        <div class="table" id="users-table">
+          <div class="table-head">
+            <span>User</span>
+            <span>Age</span>
+            <span>Heart rate</span>
+            <span>Blood pressure</span>
+            <span>Watch</span>
+            <span>Update installed</span>
+          </div>
+          <div class="table-body" id="users-body"></div>
+        </div>
+        <p class="empty-note" id="users-empty" hidden>No users match this range.</p>
+      </section>
+
+      <!-- WATCHES VIEW -->
+      <section class="view" id="view-watches">
+        <header class="view-head">
+          <h1>Watches</h1>
+          <p class="view-sub">Adjust a device's configuration level and push the change.</p>
+        </header>
+        <div class="watch-grid" id="watch-grid"></div>
+      </section>
+
+      <!-- UPDATES VIEW -->
+      <section class="view" id="view-updates">
+        <header class="view-head">
+          <h1>Software updates</h1>
+          <p class="view-sub">Track rollout status per device.</p>
+        </header>
+        <div class="table table--updates" id="updates-table">
+          <div class="table-head">
+            <span>Update</span>
+            <span>Version</span>
+            <span>Watch</span>
+            <span>Status</span>
+          </div>
+          <div class="table-body" id="updates-body"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
